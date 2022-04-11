@@ -12,3 +12,4 @@ switch(status2) {
     case 'Running': 
         runFunc2();
 }
+console.log("cześć");
