@@ -11,7 +11,7 @@ const wishlist = [
 ]
 
 const a = wishlist.reduce( (akum, elem) => {
-    akum += (elem.netto*1,23)
+    akum += (elem.netto*1,23);
     return akum;
 }, 0)
 
@@ -21,5 +21,30 @@ const b = (wishlist) => {
         return akum;
     }, [])
 }
+
+const c = func(wishlist, x  => x.name + ': ' + x.netto);
+function func(tab, pred) {
+    return tab.reduce( (akum, elem) => {
+        akum.push(pred(elem));
+        return akum;
+    }, [])
+}
+
+const d = (wishlist, pred) => {
+    return wishlist.map(pred);
+}
+
+const e = func2(wishlist, x => x.netto < 500)
+function func2(tab, pred) {
+    return tab.reduce( (akum, elem) => {
+        if (pred(elem)) akum.push(elem);
+        return akum;
+    }, [])
+}
+
+
 console.log(a);
-console.log(b(wishlist))
+console.log(b(wishlist));
+console.log(c);
+console.log(d(wishlist, x  => x.name + ': ' + x.netto));
+console.log(e);
