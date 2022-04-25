@@ -1,10 +1,12 @@
 'use strict'
 
-const tab = [0,1,2,3,3];
+const element = func([ 'Ala', 'Kot', 'Pies' ],  y => y === 'Ala');  
 
-const wynik = tab.reduce( (akum, elem) => {
-    if (elem === 5) akum = elem;
-    return akum;
-}, undefined)
+function func(tab, pred) {
+    return tab.reduce ( (akum, elem) => {
+        if(pred(elem)) akum = elem;
+        return akum;
+    }, undefined)
+}
 
-console.log(wynik)
+console.log(element)
