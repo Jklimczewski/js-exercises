@@ -5,23 +5,44 @@
 //  Zdefiniuj pola 'title' i 'author' i funkcję print(), która wypisze: author - title
 
 const book0 = {
-  // properties
+  title: "Harry Potter",
+  author: "J.K. Rowling",
+  print: function() {
+    return console.log(this.author + " - " + this.title)
+  }
 };
 
 // book0.print();
 
-const book1 = {};
-// properties
+const book1 = {
+  title: "Stulecie winnych",
+  author: "Ałbena Grabowska",
+  print: function() {
+    return console.log(this.author + " - " + this.title)
+  }
+};
 
 // book1.print();
 
-const book2 = Object.create({});
-// properties
+const book2 = Object.create({
+  title: "Henryk Sienkiewcz",
+  author: "Krzyżacy",
+  print: function() {
+    return console.log(this.author + " - " + this.title)
+  }
+});
 
 // book2.print();
 
 function BookCreator(title, author) {
-  const b = {};
+  const b = {
+    title: title,
+    author: author,
+    print: function() {
+      return console.log(this.title + " - " + this.author)
+    }
+  };
+  return b;
   // properties
 }
 
@@ -41,17 +62,19 @@ function testThis() {
   console.log(this);
 }
 
-testThis();
+// testThis();
 
 function testThis2() {
   "use strict";
   console.log(this);
 }
 
-testThis2();
+// testThis2();
 
 // 2.1. Czym jest this?
+// this jest specjalną zmienną przyjmującą wartość obiektu, w której ją piszemy. Pozwala nam odwoływać się do właściwości obiektu
 // 2.2. Do czego odwołuje się this w obu przypadkach
+// w pierwszym przypadku wypisuje wszystkie przypisane na stałe wartości obiektu, po wpisaniu 'use strict' jest undefined
 
 const person = {
   name: "Oscar Wilde",
@@ -59,7 +82,7 @@ const person = {
     console.log(this.name);
 
     function a() {
-      console.log(this);
+      console.log(a.name + ": " + person.name)
     }
     a();
   },
@@ -67,6 +90,7 @@ const person = {
 person.print();
 
 // 2.3. Jakie wartości przyjmuje this w powyższych przypadkach i dlaczego?
+// Przyjmuje wartość Oscar Wilde, ponieważ odwołujemy się do wartości name, a poźniej wszystkie stałe wartości obiektu
 // 2.4. Zmodyfikuj powyższy kod w ten sposób, aby funkcja a wyświetlała w konsoli 'a: Oscar Wilde'. Nie używaj arrow function.
 
 const printName = function () {
@@ -75,12 +99,16 @@ const printName = function () {
 
 const person1 = {
   name: "Aaron Towels",
+  printName
 };
 
 const person2 = {
   name: "Tom Clancy",
+  printName
 };
 
+person1.printName()
+person2.printName()
 // 2.5. Za pomocą funkcji printName wypisz 'name' obu autorów. Nie zmieniaj implementacji funkcji printName!
 
 const person3 = {
@@ -95,6 +123,7 @@ const person3 = {
 person3.print();
 
 // 2.6. Co wydrukuje w konsoli powyższy kod? Jaki scope ma arrow function?
+// Arrow function ma scope mniejszy, lokalny. This w tym wypadku to wartości obiektu, które widzi funckja
 
 // ========================================
 // ZADANIE 3

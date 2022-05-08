@@ -70,13 +70,19 @@ const { title3, ...bookWithoutTitle } = book3;
 // Genre: Dramat
 
 const movie1 = {
-  // Uzupełnij
+  country: "USA",
+  title: "Zielona Mila",
+  director: "Frank Darabont",
+  year: 1999,
+  genre: "Dramat"
 };
 
 // Następnie wykorzystując zabieg przedstawiony w powyższych przykładach zmodyfikuj obiekt tak, aby po wyświetleniu obiektu dostać następujący output:
 
 const {
-  // Zmodyfikuj zawartość
+  country,
+  year,
+  genre,
   ...newMovie1
 } = movie1;
 
@@ -91,17 +97,28 @@ console.log(newMovie1);
 // Year: 2011
 // Actors: Philippe: François Cluzet, Dris: Omar Sy, Yvonne: Anne Le Ny, ...
 const movie2 = {
-  // ...
+  title: "Nietykalni",
+  directors: ["Olivier Nakache", "Éric Toledano"],
+  country: "Francja",
+  year: 2011,
+  actors: {
+    Philippe: "François Cluzet", 
+    Dris: "Omar Sy", 
+    Yvonne: "Anne Le Ny",
+    Kiepski: "Grabowski"
+  }
 };
 
 // Następnie odwzoruj wygląd stworzonej struktury obiektu i wykonaj na nim poniższe operacje
 
 const {
-  // ...
+  title = "Nietykalni",
+  directors: [director1 = "Olivier Nakache"],
+  actors: {Dris: DrisRole = "Omar Sy"}
 } = movie2;
 
-// console.log(title); // Oczekiwany output -> Nietykalni
-// console.log(director1); // Oczekiwany output -> Olivier Nakache
-// console.log(DrisRole); // Oczekiwany output -> Omar Sy
+console.log(title); // Oczekiwany output -> Nietykalni
+console.log(director1); // Oczekiwany output -> Olivier Nakache
+console.log(DrisRole); // Oczekiwany output -> Omar Sy
 
 // Zmodyfikuj teraz swój kod, aby zawierał domyślne wartości, jeśli którakolwiek z własności filmu nie została podana.
