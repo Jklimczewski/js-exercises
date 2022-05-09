@@ -1,0 +1,16 @@
+{
+  "name": "lab09",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^8.15.0",
+    "nodemon": "^2.0.16"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21"
+  },
+  "scripts": {
+    "zad1": "nodemon src/creatingObjects2.js"
+  }
+}
