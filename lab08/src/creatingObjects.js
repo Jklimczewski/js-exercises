@@ -131,22 +131,43 @@ person3.print();
 
 // Powróćmy do zadania 1.
 // Dlaczego nasza funkcja BookCreator nie jest najlepszym rozwiązaniem do tworzenia obiektów?
+// Gdyż tworzymy w niej obiekt, który poźniej jest zwracany. Dodatkowo możemy w środku funkcji zmienić wartość argumentów i one pierwotne zostaną zapomniane
 
 // Zmodyfikuj funkcję BookCreator tak, aby inicjalizowała pola author i title.
 // Funkcję print zadeklaruj jako wspólną dla wszystkich obiektów tworzonych przez BookCreator.
 // Dopisz do tworzonych obiektów pole readers, które będzie zawierało liczbę czytelników.
 // Zadeklaruj funkcję addReader, która inkrementuje pole readers. addReader powinna być funkcją wspólną, tak jak print.
 
+function BookCreator(title, author) {
+    this.title = title;
+    this.author = author;
+    this.readers = 0;
+    this.print = function() {
+      console.log(this.title + " - " + this.author);
+    }
+    this.addReader = function() {
+      this.readers++;
+    }
+}
+
+const book5 = new BookCreator("Cień wiatru2", "Carlos Ruiz Zafon2");
+book5.addReader()
+book5.addReader()
+
 // ========================================
 // * ZADANIE 4
 // ========================================
 
 // Na stworzonym obiekcie wywołaj funkcję hasOwnProperty('isBestseller').
+console.log(book5.hasOwnProperty("readers"))
 // ========================================
 // Napisz dlaczego nasz obiekt ma do niej dostęp. (jeśli wyskakuje błąd - powróć do poprzedniego zadania)
+// Ponieważ dziedziczy on tą metodę z domyślnego (głównego) obiektu
 
 // ========================================
 // * ZADANIE 5
 // ========================================
 
 // Odwołaj się do zmiennej __proto__ w stworzonym obiekcie, co zawiera ta zmienna i do czego służy?
+console.log(book5.__proto__ == BookCreator.prototype)
+// każda funkcja posiada własność protype i służy do wskazania skąd ma ona dziedziczyć własności
