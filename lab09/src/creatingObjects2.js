@@ -1,12 +1,12 @@
 // 1. Uprość funkcję BookCreator z poprzednich zajęć tak, aby zawierała tylko nadawanie wartości polom. (użyj operatora this) 
 // Dodaj wywołanie słowa kluczowego new, przy wywołaniu BookCreator(). 
 function BookCreator(title, author) {
-    this.title = title,
-    this.author = author
+    this.title = title;
+    this.author = author;
 }
   
-const book1 = new BookCreator("es", "au")
-console.log(book1)
+const book1 = new BookCreator("Tytył", "Autor");
+console.log(book1);
 
 // BookCreator jest konstruktorem, a je zawsze (ZAWSZE) deklarujemy zaczynając nazwę od wielkiej litery
 
@@ -20,15 +20,37 @@ BookCreator.prototype = {
         this.reader++;
     }
 }
-  
-new BookCreator("esa", "aua").print()
-// 2. Tworzymy alternatywną wersję powyższego kodu. Użyj słów kluczowych class i constructor, aby osiągnąć powyższy efekt.
 
+const book2 = new BookCreator("esa", "aua");
+book2.print();
+console.log(book1.__proto__ == BookCreator.prototype);
+
+// 2. Tworzymy alternatywną wersję powyższego kodu. Użyj słów kluczowych class i constructor, aby osiągnąć powyższy efekt.
+class BookCreator2 {
+    constructor(title, author) {
+        this.title = title;
+        this.author = author;
+        this.readers = 0;
+    }
+    print = function() {
+        console.log(this.title + " - " + this.author);
+    }
+    addReader() {
+        this.readers++;
+    }
+}
+const book = new BookCreator2("tytuł", "autor");
+book.print3();
 
 // 3. Znasz już wiele sposób na stworzenie obiektu. Dlaczego więc nie użyć arrow function?
 // Uzupełnij poniższy kod o inicjalizację pola name i age. Dodaj wewnąrz funkcję addAge, która inkrementuje wiek. 
 
-const Person = name => ({
+const person = name => ({
+    name: name,
+    age: 1,
+    addAge: function() {
+
+    }
     // inicjalizacja
 })
 
