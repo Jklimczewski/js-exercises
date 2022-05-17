@@ -77,7 +77,7 @@ function CreateInstrument(name, type) {
    })
    return instrument;
 }
-const skrzypce = new CreateInstrument("skrzypce", "strunowy");
+const skrzypce = CreateInstrument("skrzypce", "strunowy");
 skrzypce.printInstrument();
 
 // 1.6. 
@@ -111,7 +111,7 @@ function Instrument(name, type) {
 }
 
 Instrument.prototype.printInstrument = function () {
-    console.log("Instrument: " + name + ", typ: " + type);
+    console.log("Instrument: " + this.name + ", typ: " + this.type);
 }
 
 function StringedInstrument(stringsCount, name, type) {
@@ -122,13 +122,142 @@ function StringedInstrument(stringsCount, name, type) {
 StringedInstrument.prototype = Object.create(Instrument.prototype);
 
 // a) Stwórz instancję StringedInstrument.
-const violin = new StringedInstrument(5, "violin", "stringed")
+const violin = new StringedInstrument(5, "violin", "stringed");
 
 // b) W jaki sposób odwołać się do metody printInstrument?
+
+violin.printInstrument();
 
 // c) Zastąp wywołanie call() funkcją apply() 
 
 // 1.8.
 // Utwórz obiekt Animal z polem 'name' i funkcją printName, po którym będą dziedziczyły Mammal (z polem age i funkcją getAge) i Fish (z polem weight i funkcją increaseWeight()) . 
-// Następnie stwórz kolejne obiekty - Dog (z polem breed i nadpisaniem funkcji getAge(), która tutaj będzie najpierw wywoływała funkcję getAge() z klasy dziedziczonej, a następnie mnożyła wynik razy 4 i wyświetlała go) i Salmon (z funkcją catch()), które będą dziedziczyły odpowiednio po Mammal i Fish.
+// Następnie stwórz kolejne obiekty - Dog (z polem breed i nadpisaniem funkcji getAge(), która tutaj będzie najpierw wywoływała funkcję getAge() z klasy dziedziczonej, a następnie mnożyła wynik razy 4 i wyświetlała go) 
+// i Salmon (z funkcją catch()), które będą dziedziczyły odpowiednio po Mammal i Fish.
 // W razie problemów wzoruj się na rozwiązaniu z poprzedniego zadania.
+
+// class Animal2 {
+//     constructor(name) {
+//         this.name = name;
+//     }
+//     printName() {
+//         console.log(this.name);
+//     }
+// }
+
+// class Mammal extends Animal2 {
+//     constructor(name, age) {
+//         super(name);
+//         this.age = age;
+//     }
+//     getAge() {
+//         return this.age;
+//     }
+// }
+
+// class Fish extends Animal2 {
+//     constructor(name, weight) {
+//         super(name);
+//         this.weight = weight;
+//     }
+//     increaseWeight() {
+//         this.weight++;
+//     }
+// }
+
+// const ssak = new Mammal("czlowiek", 18);
+// ssak.printName();
+// console.log(ssak.getAge());
+
+// const rybka = new Fish("łosoś", 100);
+// rybka.printName();
+// rybka.increaseWeight();
+// console.log(rybka.weight)
+
+// class Dog extends Mammal {
+//     constructor(name, age, breed){
+//         super(name, age);
+//         this.breed = breed;
+//     }
+//     getAge () {
+//         console.log(super.getAge());
+//         return super.getAge() * 4
+//     }
+// }
+
+// class Salmon extends Fish {
+//     constructor(name, weight) {
+//         super(name, weight);
+//     }
+//     catch() {
+//         console.log("catched a: " + this.weight + "g " + this.name)
+//     }
+// }
+// const pies = new Dog("owczarek", 10, "owczarek");
+// console.log(pies.name);
+// console.log(pies.age);
+// console.log(pies.getAge());
+
+// const losos = new Salmon("losoś", 1000);
+// losos.printName();
+// losos.catch();
+
+function Animal2(name) {
+    this.name = name;
+    this.printName = function() {
+        console.log(this.name);
+    }
+}
+
+function Mammal(name, age) {
+    Animal2.call(this, name)
+    this.age = age;
+}
+Mammal.prototype = Object.create(Animal2.prototype);
+Mammal.prototype.getAge = function() {
+    return this.age;
+}
+
+function Fish(name, weight) {
+    Animal2.call(this, name);
+    this.weight = weight;
+    this.increaseWeight = function() {
+        this.weight++;
+    }
+}
+Fish.prototype = Object.create(Animal2.prototype);
+
+const ssak = new Mammal("czlowiek", 18);
+ssak.printName();
+console.log(ssak.getAge());
+
+const rybka = new Fish("łosoś", 100);
+rybka.printName();
+rybka.increaseWeight();
+console.log(rybka.weight);
+
+function Dog(name, age, breed) {
+    Mammal.call(this, name, age);
+    this.breed = breed;
+}
+Dog.prototype = Object.create(Mammal.prototype);
+Dog.prototype.getAge = function() {
+    return 4 * Mammal.prototype.getAge.call(this);
+}
+
+function Salmon(name, weight) {
+    Fish.call(this, name, weight);
+    this.catch = function() {
+        console.log("catched a: " + this.weight + "g " + this.name)
+    }
+}
+Salmon.prototype = Object.create(Fish.prototype);
+
+const pies = new Dog("owczarek", 10, "owczarek");
+console.log(pies.name);
+console.log(pies.age);
+console.log(pies.getAge());
+
+const losos = new Salmon("losoś", 1000);
+losos.printName();
+losos.catch();
