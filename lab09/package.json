@@ -11,6 +11,7 @@
     "lodash": "^4.17.21"
   },
   "scripts": {
-    "zad1": "nodemon src/creatingObjects2.js"
+    "zad1": "nodemon src/creatingObjects2.js",
+    "zad3": "nodemon src/inheritance.js"
   }
 }
