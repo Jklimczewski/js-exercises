@@ -14,10 +14,11 @@ fetch("https://jsonplaceholder.typicode.com/posts")
         else console.log("ERROR")
     })
     .then(result => {
-        const { data, headers } = result
+        const { headers } = result
         console.log(headers)
-        console.log(data)
+        return result.json()
     })
+    .then(data => console.log(data))
 
 /* 
 Zadanie 1.2 
